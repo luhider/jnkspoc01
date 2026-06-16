@@ -3,18 +3,13 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws ecr get-login-password --region us-east-2 | docker login --username luhider --password-stdin Luhi@12345.dkr.ecr.us-east-2.amazonaws.com
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 323146836662.dkr.ecr.us-east-2.amazonaws.com
 
   build:
     commands:
-      - echo "Current Directory"
-      - pwd
-      - echo "Listing files"
-      - ls -la
-      - find . -name "Dockerfile"
-      - docker build -t latest -f ./Dockerfile .
+      - docker build -t frontend-app -f frontend/Dockerfile frontend
+      - docker build -t backend-app -f backend/Dockerfile backend
 
   post_build:
     commands:
-      - docker tag $ImageName:latest 323146836662.dkr.ecr.us-east-2.amazonaws.com/$ImageName:latest
-      - docker push 323146836662.dkr.ecr.us-east-2.amazonaws.com/$ImageName:latest
+      - docker images
