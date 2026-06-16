@@ -1,7 +1,7 @@
-FROM python:3.12-slim
+FROM ubuntu:24.04
 
 WORKDIR /app
 
 COPY . .
 
-CMD ["python", "app.py"]
+CMD ["echo", "Hello from Docker Container"]
