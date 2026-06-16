@@ -12,7 +12,7 @@ phases:
       - echo "Listing files"
       - ls -la
       - find . -name "Dockerfile"
-      - docker build -t $ImageName -f ./Dockerfile .
+      - docker build -t latest -f ./Dockerfile .
 
   post_build:
     commands:
