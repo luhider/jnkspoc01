@@ -3,13 +3,30 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo "Logging in to ECR..."
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 323146836662.dkr.ecr.us-east-2.amazonaws.com
 
   build:
     commands:
+      - echo "Current Working Directory:"
+      - pwd
+
+      - echo "Listing Files and Directories:"
+      - ls -la
+
+      - echo "Repository Structure:"
+      - find . -type f
+
+      - echo "Searching for Dockerfiles:"
+      - find . -name Dockerfile
+
+      - echo "Building Frontend Image..."
       - docker build -t frontend-app -f frontend/Dockerfile frontend
+
+      - echo "Building Backend Image..."
       - docker build -t backend-app -f backend/Dockerfile backend
 
   post_build:
     commands:
+      - echo "Available Docker Images:"
       - docker images
